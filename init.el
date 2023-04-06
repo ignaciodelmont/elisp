@@ -39,16 +39,12 @@
 (tool-bar-mode -1)    ; Disable the toolbar
 (tooltip-mode -1)     ; Disable tooltips
 (set-fringe-mode 2)   ; Some breathing room
-
-(global-display-line-numbers-mode t)
-
-;; Disable line numbers for some modes
-;;(dolist (mode '(term-mode-hook
-;;		shell-mode-hook))
-;;  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(global-display-line-numbers-mode t) ; Line numbers
 
 ;; Default Behavior
-(setq make-backup-files nil) ;; don't store backup files anywhere
+(setq make-backup-files nil) ; don't store backup files anywhere
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t))) ; don't clutter up the filesystem with autosave files
 
 
 (setq custom-file "~/elisp/emacs-custom.el")
@@ -99,4 +95,21 @@
 (with-eval-after-load 'copilot
   (define-key copilot-mode-map (kbd "<tab>") #'my/copilot-tab))
 
+;; Shell
+(use-package vterm
+  :ensure t
+  :config
+  (setq vterm-shell "/bin/zsh")
+  (setq vterm-max-scrollback 10000))
 
+
+;; Company
+(use-package company
+  :hook (after-init . global-company-mode)
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
+
+
+;; Magit
+(use-package magit)

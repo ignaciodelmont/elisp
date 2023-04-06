@@ -9,6 +9,7 @@
 (use-package poetry
   :ensure t)
 
-
+(use-package python-black
+  :hook (python-mode . python-black-on-save-mode-enable-dwim))
 
 
