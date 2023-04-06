@@ -49,6 +49,10 @@
 
 (setq custom-file "~/elisp/emacs-custom.el")
 (load custom-file)
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config (exec-path-from-shell-initialize))
 
 ;; Syntax
 (use-package flycheck)
