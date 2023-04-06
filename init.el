@@ -54,6 +54,12 @@
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
 
+;; Keybindings
+(setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'super)
+
 ;; Syntax
 (use-package flycheck)
 
