@@ -54,6 +54,7 @@
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
 
+
 ;; Keybindings
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
@@ -68,6 +69,7 @@
   :mode "\\.md\\'"
   )
 
+
 ;; Modeline
 (use-package all-the-icons)
 (use-package doom-themes)
@@ -79,12 +81,13 @@
 (setq lsp-diagnostic-package :none) ; disables lsp as default checker for flycheck (alongside other stuff)
 (use-package lsp-ui :commands lsp-ui-mode)
 
-;; Languages
-(load "~/elisp/python-configs")
 
-
-;; Org
-(load "~/elisp/org-configs")
+;; Which Key
+(use-package which-key
+  :init
+  (which-key-mode)
+  :config
+  (setq which-key-idle-delay 0.3))
 
 
 ;; Company
@@ -114,7 +117,6 @@
  )
 
 
-
 ;; Shell
 (use-package vterm
   :ensure t
@@ -123,7 +125,39 @@
   (setq vterm-max-scrollback 10000))
 
 
-
-
 ;; Magit
 (use-package magit)
+
+
+;; Helm
+(use-package helm
+  :ensure t
+  :config (helm-mode 1))
+
+;; Projectile
+(use-package projectile
+  :ensure t
+  :bind (:map projectile-mode-map
+	      ("s-p" . projectile-command-map))
+  :init
+  (projectile-mode +1))
+
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on))
+
+
+;; Rainbow delimiters
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+
+;; Languages
+(load "~/elisp/python-configs")
+
+
+;; Org
+(load "~/elisp/org-configs")

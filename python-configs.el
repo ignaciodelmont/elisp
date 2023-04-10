@@ -16,4 +16,8 @@
 
 
 (use-package python-black
-  :hook (python-mode . python-black-on-save-mode-enable-dwim))
+  :hook (python-mode . python-black-on-save-mode-enable-dwim)
+  :bind (:map python-mode-map
+	      ("s-b" . python-black-buffer)
+	      ("s-r" . python-black-region)))
+  
