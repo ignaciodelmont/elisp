@@ -2,8 +2,9 @@
 (require 'package)
 
 (setq package-archives
-	     '(("melpa" . "http://melpa.org/packages/")
-	       ("elpa" . "https://elpa.gnu.org/packages/")))
+      '(("melpa" . "http://melpa.org/packages/")
+	("org" . "http://orgmode.org/elpa/")
+	("elpa" . "https://elpa.gnu.org/packages/")))
 
 (print package-archives)
 
@@ -134,6 +135,10 @@
   :ensure t
   :config (helm-mode 1))
 
+;; Ripgrep
+(use-package ripgrep
+  :ensure t)
+
 ;; Projectile
 (use-package projectile
   :ensure t
@@ -148,6 +153,10 @@
   :config
   (helm-projectile-on))
 
+(use-package projectile-ripgrep
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p s s") 'projectile-ripgrep))
 
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
@@ -157,7 +166,8 @@
 
 ;; Languages
 (load "~/elisp/python-configs")
-
+(load "~/elisp/clojure-configs")
 
 ;; Org
 (load "~/elisp/org-configs")
+(put 'narrow-to-region 'disabled nil)
