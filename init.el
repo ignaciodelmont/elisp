@@ -55,6 +55,11 @@
   :if (memq window-system '(mac ns x))
   :config (exec-path-from-shell-initialize))
 
+(setq global-auto-revert-mode t) ; reload files when they change on disk
+(setq truncate-partial-width-windows nil) ; truncate even if the window is split
+(setq-default truncate-lines t) ; truncate lines instead of wrapping them
+(setq word-wrap nil) ; don't wrap words
+
 
 ;; Keybindings
 (setq mac-option-key-is-meta nil
@@ -118,6 +123,13 @@
  )
 
 
+;; Tree-sitter
+(use-package tree-sitter
+  :ensure t)
+
+(use-package tree-sitter-langs
+  :ensure t)
+
 ;; Shell
 (use-package vterm
   :ensure t
@@ -167,6 +179,7 @@
 ;; Languages
 (load "~/elisp/python-configs")
 (load "~/elisp/clojure-configs")
+(load "~/elisp/ts-js-configs")
 
 ;; Org
 (load "~/elisp/org-configs")
