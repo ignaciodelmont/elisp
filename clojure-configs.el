@@ -5,7 +5,6 @@
 (use-package clojure-mode
   :ensure t
   :hook (clojure-mode . (lambda ()
-			  (print "hey there")
 			  (lsp)
 			  (subword-mode)
 			  (paredit-mode)

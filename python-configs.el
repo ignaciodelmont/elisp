@@ -20,7 +20,9 @@
 			 (auto-virtualenv-set-virtualenv)
 			 (lsp)
 			 (flycheck-mode 1)
-			 (flycheck-select-checker 'python-flake8))))
+			 (flycheck-select-checker 'python-flake8)
+			 (tree-sitter-mode 1)
+			 (tree-sitter-hl-mode 1))))
 
 
 (use-package python-black

@@ -41,6 +41,8 @@
 (tooltip-mode -1)     ; Disable tooltips
 (set-fringe-mode 2)   ; Some breathing room
 (global-display-line-numbers-mode t) ; Line numbers
+(add-to-list 'default-frame-alist '(undecorated . t))
+(global-hl-line-mode 1)
 
 ;; Default Behavior
 (setq make-backup-files nil) ; don't store backup files anywhere
@@ -71,11 +73,6 @@
 (use-package flycheck)
 
 
-(use-package markdown-mode
-  :mode "\\.md\\'"
-  )
-
-
 ;; Modeline
 (use-package all-the-icons)
 (use-package doom-themes)
@@ -103,6 +100,9 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
 
+;; With use-package:
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 ;; Copilot
 
@@ -180,7 +180,23 @@
 (load "~/elisp/python-configs")
 (load "~/elisp/clojure-configs")
 (load "~/elisp/ts-js-configs")
+(load "~/elisp/go-configs")
 
 ;; Org
 (load "~/elisp/org-configs")
 (put 'narrow-to-region 'disabled nil)
+
+
+;; Files Tree View
+(use-package neotree
+  :ensure t)
+
+(global-set-key [f8] 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+;; Markdown
+(use-package markdown-mode
+  :mode "\\.md\\'"
+  )
+
+(use-package markdown-preview-mode
+  :ensure t)
